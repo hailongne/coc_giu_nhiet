@@ -125,10 +125,10 @@
                                     <tr>
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $sanPham['ten_san_pham'] ?></td>
-                                        <td><?= $sanPham['gia_san_pham'] ?></td>
+                                        <td><?= $sanPham['gia_san_pham']?></td>
                                         <td>
                                             <img src=<?= BASE_URL . $sanPham['hinh_anh'] ?> style="width:50px" alt=""
-                                                onerror="this.onerror=null; this.src='https://locknlock.store/wp-content/uploads/2024/06/LHC3282PIK_icon.jpg'">
+                                                onerror="this.onerror=null; this.src='https://cdn3.vectorstock.com/i/1000x1000/91/27/error-icon-vector-19829127.jpg'">
                                         </td>
                                         <td><?= $sanPham['so_luong'] ?></td>
                                         <td><?= $sanPham['ten_danh_muc'] ?></td>

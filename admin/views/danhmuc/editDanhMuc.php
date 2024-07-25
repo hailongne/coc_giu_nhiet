@@ -61,8 +61,8 @@
                             </div>
                             <!-- /.card-body -->
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="card-footer d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <a href="<?= BASE_URL_ADMIN . '?act=danh-muc'?>" class="btn btn-primary"><i
                                         class="fas fa-backward"> </i> Back</a>
                             </div>

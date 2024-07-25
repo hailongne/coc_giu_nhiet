@@ -17,6 +17,10 @@
     float: right;
     text-align: right;
 }
+
+.custom-file-input~.custom-file-label::after {
+    content: "Browse";
+}
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -73,20 +77,24 @@
                                     <?php } ?>
                                 </div>
 
-                                <div class="form-group col-6">
-                                    <label>Hình Ảnh</label>
-                                    <input type="file" class="form-control" name="hinh_anh">
-                                    <?php if (isset($_SESSION['error']['hinh_anh'])) {?>
-                                    <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
-                                    <?php } ?>
+                                <div class="form-group col-12">
+                                    <label for="hinh_anh">Hình Ảnh</label>
+                                    <div class="custom-file">
+                                        <input type="file" id="hinh_anh" class="custom-file-input" name="hinh_anh">
+                                        <label class="custom-file-label" for="hinh_anh">Choose files</label>
+                                        <?php if (isset($_SESSION['error']['hinh_anh'])) {?>
+                                        <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
+                                        <?php } ?>
+                                    </div>
                                 </div>
 
-                                <div class="form-group col-6">
-                                    <label>Album</label>
-                                    <input type="file" class="form-control" name="img_array[]" multiple>
-                                    <?php if (isset($_SESSION['error']['hinh_anh'])) {?>
-                                    <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
-                                    <?php } ?>
+                                <div class="form-group col-12">
+                                    <label for="img_array">Album Ảnh</label>
+                                    <div class="custom-file">
+                                        <input type="file" id="img_array" class="custom-file-input" name="img_array[]"
+                                            multiple>
+                                        <label class="custom-file-label" for="img_array">Choose files</label>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-6">
@@ -110,15 +118,20 @@
                                 <div class="form-group col-6">
                                     <label>Danh Mục</label>
                                     <select class="form-control" name="danh_muc_id" id="exampleFormControlSelect1">
+
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
-                                        <?php foreach($listDanhMuc as $danhMuc):  ?>
-                                        <option value="<?= $danhMuc['id']?>"><?= $danhMuc['ten_danh_muc']?></option>
-                                        <?php endforeach  ?>
+
+                                        <?php foreach ($listDanhMuc as $danhMuc): ?>
+                                        <option value="<?= $danhMuc['id']?>"><?= $danhMuc['ten_danh_muc']?>
+                                        </option>
+                                        <?php endforeach ?>
+
                                     </select>
                                     <?php if (isset($_SESSION['error']['danh_muc_id'])) {?>
                                     <p class="text-danger"><?= $_SESSION['error']['danh_muc_id'] ?></p>
                                     <?php } ?>
                                 </div>
+
 
                                 <div class="form-group col-6">
                                     <label>Trạng Thái</label>
@@ -140,8 +153,8 @@
                             </div>
                             <!-- /.card-body -->
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="card-footer d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <a href="<?= BASE_URL_ADMIN . '?act=san-pham'?>" class="btn btn-primary"><i
                                         class="fas fa-backward"> </i> Back</a>
                             </div>
@@ -158,6 +171,22 @@
     </section>
     <!-- /.content -->
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+document.querySelectorAll('.custom-file-input').forEach(input => {
+    input.addEventListener('change', function() {
+        const fileName = this.files.length > 1 ?
+            `${this.files.length} files selected` :
+            this.files[0].name;
+
+        const label = this.nextElementSibling;
+        label.classList.add('selected');
+        label.innerText = fileName;
+    });
+});
+</script>
 <!-- /.content-wrapper -->
 <!-- footer -->
 <?php

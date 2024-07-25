@@ -43,20 +43,13 @@
                                 <p>Quản Lý Sản Phẩm</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?= BASE_URL_ADMIN . '?act=don-hang'?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Lý Đơn Hàng</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?= BASE_URL_ADMIN . '?act=don-hang'?>" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Widgets
-                            <span class="right badge badge-danger">New</span>
+                            Quản Lý Đơn Hàng
                         </p>
                     </a>
                 </li>

@@ -30,7 +30,8 @@ match ($act) {
     'san-pham' =>(new AdminSanPhamController())->danhSachSanPham(),
     'add-san-pham' =>(new AdminSanPhamController())->postAddSanPham(),
     'form-add-san-pham' =>(new AdminSanPhamController())->formAddSanPham(),
-    // 'edit-san-pham' =>(new AdminSanPhamController())->postEditSanPham(),
-    // 'form-edit-san-pham' =>(new AdminSanPhamController())->formEditSanPham(),
+    'edit-san-pham' =>(new AdminSanPhamController())->postEditSanPham(),
+    'form-edit-san-pham' =>(new AdminSanPhamController())->formEditSanPham(),
+    'edit-album-san-pham' =>(new AdminSanPhamController())->postEditAnhSanPham(),
     // 'delete-san-pham' =>(new AdminSanPhamController())->deleteSanPham(),
 };
