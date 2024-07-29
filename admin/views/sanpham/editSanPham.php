@@ -28,9 +28,12 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-11">
                     <h1>Sửa thông tin sản phẩm: <?= $sanPham['ten_san_pham']?>
                     </h1>
+                </div>
+                <div class="col-sm-1">
+                    <a href="<?= BASE_URL_ADMIN . '?act=san-pham'?>" class="btn btn-secondary ">Quay Lại</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -44,7 +47,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Thông tin sản phẩm: <?= $sanPham['ten_san_pham']?></h3>
                     </div>
-                    <form action="<?= BASE_URL_ADMIN . '?act=edit-san-pham'?>" method="post"
+                    <form action="<?= BASE_URL_ADMIN . '?act=sua-san-pham'?>" method="post"
                         enctype="multipart/form-data">
                         <div class="card-body row">
                             <div class="form-group col-12">
@@ -120,9 +123,9 @@
                             <div class="form-group col-6">
                                 <label for="trang_thai">Trạng Thái Sản Phẩm</label>
                                 <select id="trang_thai" name="trang_thai" class="form-control custom-select">
-                                    <option <?= $sanPham['trang_thai']==1 ? 'selected' : '' ?> value="1">Còn hàng
+                                    <option <?= $sanPham['trang_thai'] == 1 ? 'selected' : '' ?> value="1">Còn hàng
                                     </option>
-                                    <option <?= $sanPham['trang_thai']==2 ? 'selected' : '' ?> value="1">Hết hàng
+                                    <option <?= $sanPham['trang_thai'] == 2 ? 'selected' : '' ?> value="2">Hết hàng
                                     </option>
                                 </select>
                             </div>
@@ -154,7 +157,7 @@
 
                     </div>
                     <div class="card-body p-0">
-                        <form action="<?= BASE_URL_ADMIN . '?act=edit-album-san-pham'?>" method="post"
+                        <form action="<?= BASE_URL_ADMIN . '?act=sua-album-anh-san-pham'?>" method="post"
                             enctype="multipart/form-data">
                             <div class="card-body " style="display: block">
                                 <table id="faqs" class="table table-hover">
@@ -201,12 +204,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="<?= BASE_URL_ADMIN . '?act=san-pham'?>" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Save Changes" class="btn btn-success float-right">
-            </div>
-        </div>
+
     </section>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -228,28 +226,25 @@ document.querySelectorAll('.custom-file-input').forEach(input => {
 var faqs_row = <?= count($listAnhSanPham); ?>;
 
 function addfaqs() {
-    console.log('acs');
-    html = '<tr id="faqs-row' + faqs_row + '">';
+    html = '<tr id="faqs-row-' + faqs_row + '">';
     html +=
-        '<td><img src="https://cdn3.vectorstock.com/i/1000x1000/91/27/error-icon-vector-19829127.jpg"  style="width: 50px; height: 50px" alt=""></td>';
-    html += '<td><input type="file" name="img_array[]" class="form-control"></td>';
-    html +=
-        '<td class="mt-10"><button type="button" class="badge badge-danger" onclick="removeRow(' + faqs_row +
-        ', null);"><i class="fa fa-trash"></i> Delete</button></td>';
+        '<td><img src="https://file.kenhsinhvien.vn/2015/03/29/1-1.jpg" style="width:50px; height:50px " alt=""></td>';
+    html += '<td><input type="file" name"img_array[]" class="form-control"> </td>';
+    html += '<td class "mt-10"><button class"badge badge-danger" type="button" onclick="removeRow(' + faqs_row +
+        ',null)"><i class="fa fa-trash"></i>Delete</button> </td>';
 
     html += '</tr>';
-
     $('#faqs tbody').append(html);
 
     faqs_row++;
 }
 
-function removeRow(rowID, imgId) {
-    $('#faqs-row-' + rowID).remove();
+function removeRow(rowId, imgId) {
+    $('#faqs-row-' + rowId).remove();
     if (imgId !== null) {
         var imgDeleteInput = document.getElementById('img_delete')
-        var currentValue = imgDeleteInput.value
-        imgDeleteInput.value = currentValue ? currentValue + ',' + imgId : imgId
+        var currentValue = imgDeleteInput.value;
+        imgDeleteInput.value = currentValue ? currentValue + ',' + imgId : imgId;
     }
 }
 </script>

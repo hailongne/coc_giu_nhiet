@@ -101,7 +101,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form-add-san-pham'?>">
+                            <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'?>">
                                 <button class="btn btn-success">Thêm Sản Phẩm</button>
                             </a>
                         </div>
@@ -111,42 +111,53 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Giá Sản Phẩm</th>
-                                        <th>Hình Ảnh</th>
-                                        <th>Số Lượng</th>
-                                        <th>Danh Mục</th>
-                                        <th>Trạng Thái</th>
-                                        <th>Thao Tác</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Ảnh sản phẩm</th>
+                                        <th>Giá tiền</th>
+                                        <th>Giá khuyến mãi</th>
+                                        <th>Số lượng</th>
+                                        <th>Danh mục</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($listSanPham as $key=>$sanPham): ?>
+                                    <?php foreach ($listSanPham as $key => $sanPham): ?>
                                     <tr>
-                                        <td><?= $key + 1 ?></td>
-                                        <td><?= $sanPham['ten_san_pham'] ?></td>
-                                        <td><?= $sanPham['gia_san_pham']?></td>
-                                        <td>
-                                            <img src=<?= BASE_URL . $sanPham['hinh_anh'] ?> style="width:50px" alt=""
+                                        <td><?= $key + 1 ?> </td>
+                                        <td> <?= $sanPham['ten_san_pham'] ?></td>
+                                        <td> <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt=""
+                                                style="width:100px"
                                                 onerror="this.onerror=null; this.src='https://cdn3.vectorstock.com/i/1000x1000/91/27/error-icon-vector-19829127.jpg'">
                                         </td>
-                                        <td><?= $sanPham['so_luong'] ?></td>
-                                        <td><?= $sanPham['ten_danh_muc'] ?></td>
-                                        <td><?= $sanPham['trang_thai'] == 1 ? 'Còn hàng' : 'Hết hàng'?></td>
+
+                                        <td> <?= $sanPham['gia_san_pham'] ?></td>
+                                        <td> <?= $sanPham['gia_khuyen_mai'] ?></td>
+                                        <td> <?= $sanPham['so_luong'] ?></td>
+                                        <td> <?= $sanPham['ten_danh_muc'] ?></td>
+                                        <td> <?= $sanPham['trang_thai'] == 1 ? 'Còn bán' : 'Dừng bán'; ?></td>
+
                                         <td>
-                                            <a
-                                                href="
-                                                <?= BASE_URL_ADMIN . '?act=form-edit-san-pham&id_san_pham=' . $sanPham['id']?>">
-                                                <button class="btn btn-success">Chi Tiết</button>
-                                            </a>
-                                            <a
-                                                href="<?= BASE_URL_ADMIN . '?act=form-edit-san-pham&id_san_pham=' . $sanPham['id']?>">
-                                                <button class="btn btn-success">Edit</button>
-                                            </a>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=delete-san-pham&id_san_pham=' . $sanPham['id']?>"
-                                                onclick="return confirm('are u sure?')">
-                                                <button class="btn btn-danger">Delete</button>
-                                            </a>
+                                            <div class="btn-group">
+                                                <a
+                                                    href="<?= BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <button class="btn btn-primary"> <i class="far fa-eye"></i></button>
+
+                                                </a>
+                                                <a
+                                                    href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id_san_pham=' . $sanPham['id'] ?>">
+                                                    <button class="btn btn-warning"><i class="fas fa-cogs"></i></button>
+
+                                                </a>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=xoa-san-pham&id_san_pham=' . $sanPham['id'] ?>"
+                                                    onclick="return confirm('Bạn có muốn xóa không?')">
+                                                    <button class="btn btn-danger"><i
+                                                            class="far fa-trash-alt"></i></button>
+
+                                                </a>
+                                            </div>
+
+
                                         </td>
                                     </tr>
                                     <?php endforeach ?>
@@ -177,14 +188,10 @@ $(function() {
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"],
         "language": {
             "search": "_INPUT_",
             "searchPlaceholder": "Search..."
         },
-        "dom": '<"row"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>>' +
-            '<"row"<"col-sm-12"tr>>' +
-            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>'
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
         "paging": true,

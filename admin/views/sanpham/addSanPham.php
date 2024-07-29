@@ -46,7 +46,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action=" <?= BASE_URL_ADMIN . '?act=add-san-pham'?>" method="POST"
+                        <form action=" <?= BASE_URL_ADMIN . '?act=them-san-pham'?>" method="POST"
                             enctype="multipart/form-data">
                             <div class="card-body row">
                                 <div class="form-group col-12">

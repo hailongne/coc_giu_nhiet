@@ -9,16 +9,6 @@
 
 (function ($) {
   "use strict";
-
-  // Đã bình luận phần mã hiển thị thông báo
-  // setTimeout(function () {
-  //   if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {
-  //     localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (15 * 60 * 1000))
-  //     alert('You load AdminLTE\'s "demo.js", \nthis file is only created for testing purposes!')
-  //   }
-  // }, 1000)
-
-  // Hàm để viết hoa chữ cái đầu tiên của một chuỗi
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -70,7 +60,7 @@
   $sidebar.append($container);
 
   // Add title and horizontal line
-  $container.append('<h5>Customize AdminLTE</h5><hr class="mb-2"/>');
+  $container.append('<h5>Customize Phúc Long</h5><hr class="mb-2"/>');
 
   // Dark mode toggle
   var $dark_mode_checkbox = $("<input />", {

@@ -100,14 +100,10 @@ $(function() {
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"],
         "language": {
             "search": "_INPUT_",
             "searchPlaceholder": "Search..."
         },
-        "dom": '<"row"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>>' +
-            '<"row"<"col-sm-12"tr>>' +
-            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>'
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
         "paging": true,
