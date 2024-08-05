@@ -1,25 +1,26 @@
-<?php 
+<?php
+require_once './models/SanPham.php';
 
-class HomeController
-{
+class HomeController {
+    private $model;
 
-    public $modelSanPham;
-
-    public function __construct(){
-       $this->modelSanPham = new SanPham();
+    public function __construct() {
+        $this->model = new SanPham();
     }
 
-    public function home(){
-        echo "Trang Home";
+    public function home() {
+        require './views/pages/home.php';
     }
 
-    public function trangChu(){
-        echo "Trang Chu";
+    public function trangChu() {
+        require './views/pages/home.php';
     }
 
-    public function listProduct(){
-        $listProduct = $this -> modelSanPham->getAllProduct();
-        // var_dump($listProduct);die();
-        require_once './views/listProduct.php';
+    public function chinhSachBaoMat(){
+        require_once './views/pages/chinhsach/chinhsachbaomat.php';
+    }
+    
+    public function chinhSachThongBao(){
+        require_once './views/pages/chinhsach/chinhsachthongbao.php';
     }
 }

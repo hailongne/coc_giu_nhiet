@@ -159,7 +159,7 @@
                     <div class="card-body p-0">
                         <form action="<?= BASE_URL_ADMIN . '?act=sua-album-anh-san-pham'?>" method="post"
                             enctype="multipart/form-data">
-                            <div class="card-body " style="display: block">
+                            <div class="card-body" style="display: block">
                                 <table id="faqs" class="table table-hover">
                                     <thead>
                                         <tr>
@@ -168,8 +168,8 @@
                                             <th>
                                                 <div class="text-center">
                                                     <button onclick="addfaqs();" class="badge badge-success"
-                                                        type="button"><i class="fa fa-plus"></i>
-                                                        ADD NEW
+                                                        type="button">
+                                                        <i class="fa fa-plus"></i> ADD NEW
                                                     </button>
                                                 </div>
                                             </th>
@@ -181,22 +181,21 @@
                                         <?php foreach ($listAnhSanPham as $key => $value): ?>
                                         <tr id="faqs-row-<?= $key ?>">
                                             <input type="hidden" name="current_img_ids[]" value="<?= $value['id'] ?>">
-                                            <td><img src="<?=BASE_URL . $value['link_hinh_anh'] ?>"
-                                                    style="width: 50px; height: 50px" alt="">
-                                            </td>
-                                            <td><input type="file" name="img_array[]" class="form-control">
-                                            </td>
-                                            <td class="mt-10"><button class="badge badge-danger" type="button"
-                                                    onclick="removeRow(<?= $key ?>,<?= $value['id'] ?>)"><i
-                                                        class="fa fa-trash"></i>
-                                                    Delete</button>
+                                            <td><img src="<?= BASE_URL . $value['link_hinh_anh'] ?>"
+                                                    style="width: 50px; height: 50px" alt=""></td>
+                                            <td><input type="file" name="img_array[]" class="form-control"></td>
+                                            <td class="mt-10">
+                                                <button class="badge badge-danger" type="button"
+                                                    onclick="removeRow(<?= $key ?>,<?= $value['id'] ?>)">
+                                                    <i class="fa fa-trash"></i> Delete
+                                                </button>
                                             </td>
                                         </tr>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class=" card-footer">
+                            <div class="card-footer">
                                 <button type="submit" class="btn btn-primary w-100">submit</button>
                             </div>
                         </form>
@@ -204,19 +203,17 @@
                 </div>
             </div>
         </div>
-
-    </section>
 </div>
+</div>
+</section>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 document.querySelectorAll('.custom-file-input').forEach(input => {
     input.addEventListener('change', function() {
-        const fileName = this.files.length > 1 ?
-            `${this.files.length} files selected` :
-            this.files[0].name;
-
+        const fileName = this.files.length > 1 ? `${this.files.length} files selected` : this.files[0]
+            .name;
         const label = this.nextElementSibling;
         label.classList.add('selected');
         label.innerText = fileName;
@@ -228,21 +225,19 @@ var faqs_row = <?= count($listAnhSanPham); ?>;
 function addfaqs() {
     html = '<tr id="faqs-row-' + faqs_row + '">';
     html +=
-        '<td><img src="https://file.kenhsinhvien.vn/2015/03/29/1-1.jpg" style="width:50px; height:50px " alt=""></td>';
-    html += '<td><input type="file" name"img_array[]" class="form-control"> </td>';
-    html += '<td class "mt-10"><button class"badge badge-danger" type="button" onclick="removeRow(' + faqs_row +
-        ',null)"><i class="fa fa-trash"></i>Delete</button> </td>';
-
+        '<td><img src="https://file.kenhsinhvien.vn/2015/03/29/1-1.jpg" style="width:50px; height:50px" alt=""></td>';
+    html += '<td><input type="file" name="img_array[]" class="form-control"></td>';
+    html += '<td class="mt-10"><button class="badge badge-danger" type="button" onclick="removeRow(' + faqs_row +
+        ',null)"><i class="fa fa-trash"></i> Delete</button></td>';
     html += '</tr>';
     $('#faqs tbody').append(html);
-
     faqs_row++;
 }
 
 function removeRow(rowId, imgId) {
     $('#faqs-row-' + rowId).remove();
     if (imgId !== null) {
-        var imgDeleteInput = document.getElementById('img_delete')
+        var imgDeleteInput = document.getElementById('img_delete');
         var currentValue = imgDeleteInput.value;
         imgDeleteInput.value = currentValue ? currentValue + ',' + imgId : imgId;
     }

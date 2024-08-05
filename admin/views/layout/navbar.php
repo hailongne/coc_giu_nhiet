@@ -6,7 +6,7 @@
              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
          </li>
          <li class="nav-item d-none d-sm-inline-block">
-             <a href="<?= BASE_URL ?>" class="nav-link">Website</a>
+             <a href="<?= BASE_URL ?>" class="nav-link"><i class="fas fa-store mr-1"></i> Website</a>
          </li>
      </ul>
      <!-- Right navbar links -->

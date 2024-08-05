@@ -8,11 +8,14 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminDonHangController.php';
+require_once './controllers/AdminBaoCaoThongKeController.php';
+require_once './controllers/AdminTaiKhoanController.php';
 
 // Require toàn bộ file Models 
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminDonHang.php';
+require_once './models/AdminTaiKhoan.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -21,7 +24,7 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     'admin' =>(new AdminDanhMucController())->admin(),
-    '/' =>(new AdminDanhMucController())->admin(),
+    '/' =>(new AdminBaoCaoThongKeController())->home(),
     'danh-muc' =>(new AdminDanhMucController())->danhSachDanhMuc(),
     'add-danh-muc' =>(new AdminDanhMucController())->postAddDanhMuc(),
     'form-add-danh-muc' =>(new AdminDanhMucController())->formAddDanhMuc(),
@@ -43,4 +46,16 @@ match ($act) {
     'sua-don-hang' => (new AdminDonHangController())->postEditDonHang(),
     'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
 
+    'list-tai-khoan-quan-tri' => (new AdminTaiKhoanController())->danhSachQuanTri(),
+    'form-them-quan-tri' => (new AdminTaiKhoanController())->formAddQuanTri(),
+    'them-quan-tri' => (new AdminTaiKhoanController())->postAddQuanTri(),
+    'form-sua-quan-tri' => (new AdminTaiKhoanController())->formEditQuanTri(),
+    'sua-quan-tri' => (new AdminTaiKhoanController())->postEditQuanTri(),
+
+    'reset-password' => (new AdminTaiKhoanController())->resetPassword(),
+
+    'list-tai-khoan-khach-hang' => (new AdminTaiKhoanController())->danhSachKhachHang(),
+    'form-sua-khach-hang' => (new AdminTaiKhoanController())->formEditKhachHang(),
+    'sua-khach-hang' => (new AdminTaiKhoanController())->postEditKhachHang(),
+    // 'chi-tiet-khach-hang' => (new AdminTaiKhoanController())->detailKhachHang(),
 };

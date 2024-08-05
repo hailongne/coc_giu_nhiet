@@ -64,10 +64,10 @@
                                         <td>
                                             <a
                                                 href="<?= BASE_URL_ADMIN . '?act=form-edit-danh-muc&id_danh_muc=' . $danhMuc['id']?>">
-                                                <button class="btn btn-success">Edit</button>
+                                                <button class="btn btn-warning"><i class="fas fa-edit"></i>
+                                                    Edit</button>
                                             </a>
-                                            <a href="<?= BASE_URL_ADMIN . '?act=delete-danh-muc&id_danh_muc=' . $danhMuc['id']?>"
-                                                onclick="return confirm('are u sure?')">
+                                            <a href="#" onclick="confirmDeleteDanhMuc(<?= $danhMuc['id'] ?>)">
                                                 <button class="btn btn-danger">Delete</button>
                                             </a>
                                         </td>
@@ -115,6 +115,27 @@ $(function() {
         "responsive": true,
     });
 });
+
+function confirmDeleteDanhMuc(id) {
+    Swal.fire({
+        title: 'Bạn có chắc chắn muốn xóa danh mục này không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Có, xóa nó!',
+        cancelButtonText: 'Không, hủy!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '<?= BASE_URL_ADMIN ?>?act=delete-danh-muc&id_danh_muc=' + id;
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+                'Hủy',
+                'Danh mục vẫn an toàn :)',
+                'error'
+            )
+        }
+    })
+}
 </script>
 </body>
 

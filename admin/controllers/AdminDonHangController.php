@@ -17,11 +17,15 @@ class AdminDonHangController
     public function detailDonHang()
     {
         $don_hang_id = $_GET['id_don_hang'];
+        
         //lay thong tin don hang o bang don_hangs
         $donHang = $this->modelDonHang->getDetailDonHang($don_hang_id);
+
         //lay danh sach san pham da dat cua don hang o bang chi_tiet_don_hangs
-        $donHangDonHang = $this->modelDonHang->getListSpDonHang($don_hang_id);
+        $sanPhamDonHang = $this->modelDonHang->getListSpDonHang($don_hang_id);
+
         $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
+        
         require_once './views/donhang/detailDonHang.php';
 
     }

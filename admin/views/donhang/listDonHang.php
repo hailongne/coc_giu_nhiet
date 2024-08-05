@@ -9,6 +9,20 @@
 <!-- end slidebar -->
 <!-- Content Wrapper. Contains page content -->
 <style>
+.card-body a {
+    margin-right: 5px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right;
+    text-align: right;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+}
+
 .dataTables_filter {
     float: right;
 }
@@ -72,7 +86,7 @@
                                                 </a>
                                                 <a
                                                     href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>">
-                                                    <button class="btn btn-warning"><i class="fas fa-cogs"></i></button>
+                                                    <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
 
                                                 </a>
 
