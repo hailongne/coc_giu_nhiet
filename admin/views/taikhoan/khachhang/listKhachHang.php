@@ -119,7 +119,7 @@
                                     <tr>
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $khachHang['ho_ten'] ?></td>
-                                        <td> <img src="<?= BASE_URL . $sanPham['anh_dai_dien'] ?>" alt=""
+                                        <td> <img src="<?= BASE_URL . $khachHang['anh_dai_dien'] ?>" alt=""
                                                 style="width:100px"
                                                 onerror="this.onerror=null; this.src='https://i.pinimg.com/originals/fc/04/73/fc047347b17f7df7ff288d78c8c281cf.png'">
                                         </td>

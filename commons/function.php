@@ -50,7 +50,7 @@ function connectDB()
             // hủy session sau khi đã tải trang
             unset($_SESSION['flash']);
             session_unset();
-            session_destroy();
+            // session_destroy();
         }
     }
 
@@ -74,4 +74,18 @@ function connectDB()
 function formatDate($date)
 {
     return date("d-m-Y", strtotime($date));
+}
+
+function checkLoginAdmin(){
+    if (!isset($_SESSION['user_admin'])) {
+        header("Location: " . BASE_URL_ADMIN . '?act=login-admin');
+        exit();
+    }
+}
+
+function checkLoginUser(){
+    if (!isset($_SESSION['user'])) {
+        header("Location: " . BASE_URL . '?act=dang-nhap-tai-khoan');
+        exit();
+    }
 }

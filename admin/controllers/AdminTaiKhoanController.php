@@ -3,9 +3,13 @@
 class AdminTaiKhoanController{
     
     public $modelTaiKhoan;
+    public $modelDonHang;
+    public $modelSanPham;
     
     public function __construct(){
         $this->modelTaiKhoan = new AdminTaiKhoan();
+        $this->modelDonHang = new AdminDonHang();
+        $this->modelSanPham = new AdminSanPham();
     }
 
     public function danhSachQuanTri(){
@@ -214,4 +218,54 @@ class AdminTaiKhoanController{
             }
         }
     }
+
+    public function detailKhachHang (){
+        $id_khach_hang = $_GET['id_khach_hang'];
+        
+        $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
+
+        $listDonHang = $this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
+
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromKhachHang($id_khach_hang);
+
+        require_once './views/taikhoan/khachhang/detailKhachHang.php';
+
+    }
+
+    public function formLogin(){
+        require_once './views/auth/formLogin.php';
+
+        deleteSessionError();
+    }
+
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $user = $this->modelTaiKhoan->checklogin($email, $password);
+            // var_dump($email);die;
+
+            if($user == $email) {
+                $_SESSION['user_admin'] = $user;
+                header ("Location: " . BASE_URL_ADMIN);
+                exit();
+            }else{
+                $_SESSION['error'] = $user;
+                // var_dump($_SESSION['error']);die;
+                $_SESSION['flash'] = true;
+                header ("Location:" . BASE_URL_ADMIN . '?act=login-admin');
+                exit();
+            }
+        }
+    }
+
+    public function logout(){
+        if (isset($_SESSION['user_admin'])) {
+            unset($_SESSION['user_admin']);
+            header("Location:" . BASE_URL_ADMIN . '?act=login-admin');
+        }
+    }
+    
 }

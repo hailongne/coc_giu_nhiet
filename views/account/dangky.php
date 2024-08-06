@@ -1,84 +1,104 @@
-<?php include './views/layout/header.php'; ?>
-<style>
-.main-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
-    height: calc(100vh - 60px);
-}
+<!DOCTYPE html>
+<html lang="en">
 
-.main-content {
-    margin: 100px auto;
-    display: flex;
-    width: 80%;
-    max-width: 100%;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Favicon.ico -->
+    <link rel="icon" href="views/assets/logo/logo.png" type="image/x-icon">
 
-.left-section {
-    flex: 1;
-    padding: 20px;
-    margin-right: 10px;
-    border-right: 1px solid #999;
-}
+    <!-- Favicon.png -->
+    <link rel="icon" href="views/assets/logo/logo.png" type="image/png">
 
-.right-section {
-    margin: auto;
-    text-align: center;
-    flex: 1;
-    padding: 20px;
-}
+    <!-- Favicon.svg (nếu sử dụng SVG) -->
+    <link rel="icon" href="views/assets/logo/logo.png" type="image/svg+xml">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-.signup-section {
-    flex: 1;
-    padding: 20px;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+    }
 
-h2 {
-    margin-top: 0;
-    font-size: 24px;
-    color: #333;
-}
+    .main-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        width: 100%;
+        max-width: 1200px;
+        margin: 50px auto;
+        background-color: #fff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+    .left-section,
+    .right-section {
+        flex: 1;
+        padding: 40px;
+    }
 
-label {
-    margin: 10px 0 5px;
-    font-weight: bold;
-}
+    .divider {
+        width: 1px;
+        background-color: #ccc;
+    }
 
-input {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
+    .signup-section {
+        max-width: 400px;
+        margin: 0 auto;
+    }
 
-button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
+    .signup-section form {
+        margin-top: 20px;
+    }
 
-button:hover {
-    background-color: #0056b3;
-}
-</style>
+    .signup-section .form-group {
+        margin-bottom: 15px;
+    }
+
+    .signup-section button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .signup-section a {
+        display: inline-block;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .signup-section a:hover {
+        text-decoration: underline;
+    }
+
+    .right-section {
+        text-align: center;
+    }
+
+    .right-section h2 {
+        margin-bottom: 20px;
+    }
+
+    .right-section p {
+        margin-bottom: 30px;
+    }
+
+    .right-section button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    </style>
+</head>
 
 <div class="main-content">
     <section class="left-section">
@@ -121,7 +141,7 @@ button:hover {
                         <?php } ?>
                     </div>
 
-                    <button type="submit">Đăng ký</button>
+                    <button type="submit" class="btn btn-info">Đăng ký</button>
                 </form>
             </div>
         </div>
@@ -138,4 +158,3 @@ button:hover {
 
     </section>
 </div>
-<?php include './views/layout/footer.php'; ?>

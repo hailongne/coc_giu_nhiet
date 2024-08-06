@@ -96,4 +96,26 @@ class SanPham{
             echo "loi" . $e->getMessage();
         }
     }
+    public function search() {
+        // Lấy giá trị tìm kiếm từ biến GET, nếu không có giá trị thì đặt thành chuỗi rỗng
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+    
+        // Kiểm tra nếu có từ khóa tìm kiếm
+        if ($search) {
+            // Chuẩn bị câu truy vấn SQL với điều kiện tìm kiếm
+            $sql = "SELECT * FROM san_phams WHERE ten_san_pham LIKE :search";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['search' => '%' . $search . '%']);
+            
+            // Lấy tất cả các kết quả tìm kiếm
+            $listSanPham = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Trả về danh sách sản phẩm tìm được
+            return $listSanPham;
+        } else {
+            // Nếu không có từ khóa tìm kiếm, trả về thông báo không có sản phẩm
+            return 'không tồn tại sản phẩm nào';
+        }
+    }
+    
 }

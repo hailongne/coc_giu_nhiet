@@ -61,69 +61,55 @@
                         </h4>
                         <h4 class="mt-3">Mô tả: <small><?= $sanPham['mo_ta']?></small></h4>
                         <br>
-                        <div class="col-mt-1">
-                            <a href="<?= BASE_URL_ADMIN . '?act=san-pham'?>" class="btn btn-secondary w-50">Quay
-                                Lại</a>
-                        </div>
                     </div>
-                </div>
-                <!-- <div class="row mt-4">
-      <nav class="w-100">
-        <div class="nav nav-tabs" id="product-tab" role="tablist">
-          <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#binh-luan" role="tab" aria-controls="product-desc" aria-selected="true">bình luận sản phẩm</a>
-          
-        </div>
-      </nav>
-      <div class="tab-content p-3" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="binh-desc" role="tabpanel" aria-labelledby="product-desc-tab"> 
-           <div class="container">
-           
-           </div>
-      
-        </div>
-       
-      </div>
-    </div> -->
-                <ul class="nav nav-tabs row mt-4" id="product-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home"
-                            type="button" role="tab" aria-controls="pills-home" aria-selected="true">Bình luận sản
-                            phẩm</button>
-                    </li>
-
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                        aria-labelledby="pills-home-tab">
-                        <table class="table table-striped table-hover">
+                    <div class="col-12">
+                        <hr>
+                        <hr>
+                        <h2>Bình luận</h2>
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>tên người bình luận</th>
-                                    <th> Nội dung</th>
-                                    <th>Ngày đăng</th>
+                                    <th>STT</th>
+                                    <th>Sản Phẩm</th>
+                                    <th>Nội Dung</th>
+                                    <th>Ngày Bình Luận</th>
+                                    <th>Trạng Thái</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($listBinhLuan as $key => $binhLuan): ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Hải Long</td>
-                                    <td>Sản phẩm hơi cũ</td>
-                                    <td>20/07/2024</td>
+                                    <td><?= $key + 1 ?> </td>
+                                    <td> <a target="_blank"
+                                            href="<?= BASE_URL_ADMIN . '?act=chi-tiet-khach-hang&id_khach_hang=' . $binhLuan['tai_khoan_id']?>"><?= $binhLuan['ho_ten'] ?></a>
+                                    </td>
+                                    <td> <?= $binhLuan['noi_dung'] ?></td>
+                                    <td> <?= $binhLuan['ngay_dang'] ?></td>
+                                    <td> <?= $binhLuan['trang_thai'] == 1 ? 'Hiển Thị' : 'Ẩn'?></td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="#"><button class=" btn btn-warning">ẩn</button></a>
-                                            <a href="#"><button class=" btn btn-danger">xóa</button></a>
+                                            <form id="hide-comment-form"
+                                                action="<?= BASE_URL_ADMIN . '?act=update-trang-thai-binh-luan' ?>"
+                                                method="POST">
+                                                <input type="hidden" name="id_binh_luan" value="<?= $binhLuan['id'] ?>">
+                                                <input type="hidden" name="name_view" value="detail_sanpham">
+                                                <button type="button" class="btn btn-danger" id="hide-comment-button">
+                                                    <?= $binhLuan['trang_thai'] == 1 ? ' Ẩn' : 'Hiển Thị'?> Bình Luận
+                                                </button>
+                                            </form>
                                         </div>
+
+
                                     </td>
                                 </tr>
+                                <?php endforeach ?>
                             </tbody>
                         </table>
-
                     </div>
-
                 </div>
+
+
             </div>
             <!-- /.card-body -->
         </div>
@@ -138,6 +124,23 @@
 <!-- end footer -->
 <!-- Page specific script -->
 <script>
+document.getElementById('hide-comment-button').addEventListener('click', function() {
+    Swal.fire({
+        title: 'Bạn có muốn <?= $binhLuan['trang_thai'] == 1 ? ' ẩn' : 'hiển thị'?> Bình Luận này không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Có!',
+        cancelButtonText: 'Không, hủy!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('hide-comment-form').submit();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire('Hủy', 'Bình luận vẫn được hiển thị :)', 'error');
+        }
+    })
+});
+
 $(function() {
     $("#example1").DataTable({
         "responsive": true,

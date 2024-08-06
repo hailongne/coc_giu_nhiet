@@ -16,6 +16,30 @@
                  <i class="fas fa-expand-arrows-alt"></i>
              </a>
          </li>
+         <li class="nav-item">
+             <a href="<?= BASE_URL_ADMIN . '?act=logout-admin' ?>" class="nav-link" id="logout-link">
+                 <i class="fas fa-sign-out-alt"></i>
+             </a>
+         </li>
      </ul>
  </nav>
  <!-- /.navbar -->
+ <script>
+document.getElementById('logout-link').addEventListener('click', function(event) {
+    event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+
+    Swal.fire({
+        title: 'Bạn có chắc chắn muốn đăng xuất?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Đăng xuất',
+        cancelButtonText: 'Hủy bỏ',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Thực hiện hành động đăng xuất, ví dụ chuyển hướng đến trang đăng xuất
+            window.location.href = '<?= BASE_URL_ADMIN . '?act=logout-admin' ?>';
+        }
+    });
+});
+ </script>

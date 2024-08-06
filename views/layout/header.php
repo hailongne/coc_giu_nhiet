@@ -110,28 +110,6 @@
         width: 150px;
     }
 
-    .header-main .search-bar {
-        width: 100%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-    }
-
-    .header-main .search-bar input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 0;
-    }
-
-    .header-main .search-bar .fas {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #999;
-    }
-
     .header-main .user-actions {
         display: flex;
         align-items: center;
@@ -240,7 +218,7 @@
             <div class="right-content">
                 <a href="https://www.facebook.com/hailong.07.01.2004/"><i class="fab fa-facebook-f"></i></a>
                 <a href="#">Tài khoản</a>
-                <a href="<?= BASE_URL . '?act=dang-ky-tai-khoan' ?>">ĐĂNG NHẬP / ĐĂNG KÝ</a>
+                <a href="<?= BASE_URL . '?act=dang-ky-tai-khoan' ?>">LOGOUT</a>
                 <a href="<?= BASE_URL_ADMIN ?>">ADMIN</a>
             </div>
         </div>
@@ -255,10 +233,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Tìm kiếm sản phẩm">
-                        <i class="fas fa-search"></i>
-                    </div>
+
                 </div>
 
                 <div class="col-md-3">
@@ -274,9 +249,10 @@
                                 <a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>">Ly Giữ Nhiệt</a>
                             </div>
                         </div>
-                        <a href="<?= BASE_URL . '?act=dang-ky-tai-khoan' ?>" style="font-size: 25px; padding: 0 20px"><i
+                        <a href="<?= BASE_URL ?>" style="font-size: 25px; padding: 0 20px"><i
                                 class="fas fa-user-tie"></i></a>
-                        <a href="#" style="font-size: 25px; padding: 0 20px"><i class="fas fa-shopping-cart"></i> </a>
+                        <a href="<?= BASE_URL . '?act=gio-hang' ?>" style="font-size: 25px; padding: 0 20px"><i
+                                class="fas fa-shopping-cart"></i> </a>
                     </div>
                 </div>
             </div>

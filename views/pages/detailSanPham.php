@@ -130,10 +130,9 @@ h4 small {
                         </h4>
                         <h4 class="mt-3">Mô tả: <small><?= $sanPham['mo_ta']?></small></h4>
                         <br>
-                        <div class="col-mt-1">
-                            <a href="<?= BASE_URL . '?act=danh-sach-san-pham'?>" class="btn btn-secondary w-50">Quay
-                                Lại</a>
-                        </div>
+                        <form action="<?= BASE_URL . '?act=them-vao-gio-hang' ?>" method="POST">
+                            <button type="submit" class="btn btn-info">Thêm Vào Giỏ Hàng</button>
+                        </form>
                     </div>
                 </div>
             </div>

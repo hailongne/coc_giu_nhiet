@@ -51,18 +51,66 @@
     vertical-align: middle;
 }
 
-.btn {
-    margin-right: 5px;
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
 }
 
-/* Đặt màu nền và đường viền cho các nút */
-.btn-success {
-    border-color: #28a745;
+.btn-group .btn {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
+.btn-primary {
+    width: 110px;
+    height: 50px;
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+/* Style cho nút Warning */
+.btn-warning {
+    width: 110px;
+    height: 50px;
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    /* Màu nền khi hover */
+    color: #212529;
+}
+
+/* Style cho nút Danger */
 .btn-danger {
-    border-color: #dc3545;
+    width: 100px;
+    height: 50px;
+    background-color: #dc3545;
+    color: #fff;
 }
+
+.btn-danger:hover {
+    background-color: #c82333;
+    /* Màu nền khi hover */
+    color: #fff;
+}
+
+/* Style cho icon trong nút */
+.btn i {
+    margin-right: 0.5rem;
+    /* Khoảng cách giữa icon và text */
+    font-size: 1rem;
+    /* Kích thước icon */
+}
+
 
 /* Đặt khoảng cách giữa các nút */
 .card-body a {
@@ -153,7 +201,8 @@
                                                 </a>
                                                 <a href="#" onclick="confirmDeleteProduct(<?= $sanPham['id'] ?>)">
                                                     <button class="btn btn-danger"><i
-                                                            class="far fa-trash-alt"></i></button>
+                                                            class="far fa-trash-alt"></i>Delete
+                                                    </button>
                                                 </a>
                                             </div>
 

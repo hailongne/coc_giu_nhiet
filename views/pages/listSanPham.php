@@ -3,6 +3,7 @@
 <style>
 .title {
     border-bottom: 2px solid #555;
+    margin-bottom: 20px;
 
 }
 
@@ -104,11 +105,50 @@
         font-size: 0.875rem;
     }
 }
+
+
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1.col-6 {
+    flex: 1;
+    margin: 0;
+}
+
+.search-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.search-bar input[type="text"] {
+    padding: 0.5rem 1rem;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 80%;
+}
+
+.search-bar i.fas.fa-search {
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+}
 </style>
 
 <body>
     <main class="container mt-5">
-        <h1 class=" title mb-4">Sản Phẩm Mới Nhất</h1>
+        <div class="row title">
+            <h1 class="col-6">Sản Phẩm Mới Nhất</h1>
+            <div class="search-bar col-6">
+                <input type="text" placeholder="Tìm kiếm sản phẩm">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
         <div class="row">
             <?php foreach ($listSanPham as $sanPham): ?>
             <div class="col-lg-4 col-md-6 mb-4">
@@ -138,7 +178,15 @@
     </main>
 </body>
 
-
+<script>
+$(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+});
+</script>
 
 <?php include './views/layout/footer.php'; ?>
 

@@ -139,5 +139,39 @@ class AdminTaiKhoan{
             echo "loi" . $e->getMessage();
         }
     }
+
+    public function checkLogin($email, $mat_khau){
+        try {
+            $sql = "SELECT * FROM tai_khoans WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute (['email'=>$email]);
+
+            $user = $stmt->fetch();
+
+            if ($user && password_verify($mat_khau,$user['mat_khau'])) {
+                
+                if ($user['chuc_vu_id'] == 1 ) {
+                    
+                    if ($user['trang_thai'] == 1) {
+                        return $user['email'];
+                    }else{
+                        
+                    return 'Tài Khoản Bị Cấm!!!!!';
+                    }
+                    
+                } else {
+                    return 'Tài Khoản không có quyền đăng nhập !!!!!';
+                }
+                
+            }else{
+                return 'Bạn nhập sai tài khoản hoặc mật khẩu !!!!!';
+            }
+        }catch(\Exception $e){
+            echo 'failed' . $e->getMessage();
+            return false;
+        }
+    }
+
+    
     
 }

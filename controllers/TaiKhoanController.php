@@ -36,7 +36,7 @@ class TaiKhoanController {
     
             if (empty($errors)) {
                 // Gọi phương thức đăng ký từ model
-                $result = $this->modelTaiKhoan->register($ho_ten, $email, $so_dien_thoai, $password);
+                $result = $this->modelTaiKhoan->checkRegister($ho_ten, $email, $so_dien_thoai, $password);
     
                 if ($result) {
                     // Đăng ký thành công, chuyển hướng đến trang đăng nhập
@@ -81,11 +81,12 @@ class TaiKhoanController {
     
             if (empty($errors)) {
                 // Gọi phương thức đăng nhập từ model
-                $user = $this->modelTaiKhoan->login($email, $password);
+                $user = $this->modelTaiKhoan->checkLogin($email, $password);
     
                 if ($user) {
                     // Đăng nhập thành công, lưu thông tin vào session và chuyển hướng về trang chủ
                     session_start();
+                    $_SESSION['user'] = $user;
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_email'] = $user['email'];
                     header("Location: " . BASE_URL);
@@ -106,13 +107,11 @@ class TaiKhoanController {
         // Hiển thị form đăng nhập nếu không phải là POST
         require './views/account/dangnhap.php';
     }
-
-      // Phương thức kiểm tra quyền
-      public function checkRole($requiredRole) {
-        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == $requiredRole) {
-            return true;
+    public function logout(){
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+            header("Location:" . BASE_URL . '?act=dang-nhap-tai-khoan');
         }
-        return false;
     }
     
 }
