@@ -21,9 +21,9 @@ class DonHang
                                             tong_tien, 
                                             phuong_thuc_thanh_toan_id, 
                                             ngay_dat,
-                                            trang_thai_id,
-                                            ma_don_hang) 
-                VALUES (:tai_khoan_id,:ten_nguoi_dat, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :tong_tien, :phuong_thuc_thanh_toan_id, :ngay_dat, :ma_don_hang,:trang_thai_id)';
+                                            ma_don_hang,
+                                            trang_thai_id) 
+                VALUES (:tai_khoan_id,:ten_nguoi_nhan, :email_nguoi_nhan, :sdt_nguoi_nhan, :dia_chi_nguoi_nhan, :ghi_chu, :tong_tien, :phuong_thuc_thanh_toan_id, :ngay_dat, :ma_don_hang,:trang_thai_id)';
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':tai_khoan_id'=>$tai_khoan_id,
@@ -36,7 +36,7 @@ class DonHang
                             ':phuong_thuc_thanh_toan_id'=>$phuong_thuc_thanh_toan_id,
                             ':ngay_dat'=>$ngay_dat,
                             ':ma_don_hang'=>$ma_don_hang,
-                            ':trang_thai_id'=>$trang_thai_id,
+                            ':trang_thai_id'=>$trang_thai_id
         ]);
             return $this->conn->lastInsertId();
         } catch (Exception $e) {

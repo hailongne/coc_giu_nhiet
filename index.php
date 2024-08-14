@@ -30,8 +30,9 @@ match ($act) {
     
     'login'=> (new HomeController())->formLogin(),
     'check-login'=> (new HomeController())->postLogin(),
-    'register'=> (new HomeController())->formRegister(),
     'logout'=> (new HomeController())->logout(),
+    'register' => (new HomeController())->formRegister(),
+    'add-register' => (new HomeController())->postAddRegister(),
 
     'them-gio-hang'=> (new HomeController())-> addGioHang(),
     'gio-hang'=> (new HomeController())-> gioHang(),

@@ -39,26 +39,6 @@ class TaiKhoan {
         }
     }
 
-    public function checkRegister($ho_ten, $email, $so_dien_thoai, $password) {
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-        // Kiểm tra xem email đã tồn tại chưa
-        $sql = "SELECT id FROM tai_khoans WHERE email = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$email]);
-
-        if ($stmt->rowCount() > 0) {
-            return false; // Email đã tồn tại
-        }
-
-        // Thêm người dùng vào cơ sở dữ liệu
-        $sql = "INSERT INTO tai_khoans (ho_ten, email, so_dien_thoai, mat_khau, chuc_vu_id, trang_thai) 
-                VALUES (?, ?, ?, ?, 2, 1)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$ho_ten, $email, $so_dien_thoai, $hashed_password]);
-        return true;
-    }
-
     public function getTaiKhoanFromEmail($email){
         try {
             $sql = "SELECT * FROM tai_khoans WHERE email = :email";
@@ -70,6 +50,26 @@ class TaiKhoan {
             return $stmt ->fetch();
         } catch (Exception $e)   {
             echo 'failed' . $e->getMessage();
+        }
+    }
+
+    public function insertTaiKhoan($ho_ten, $email, $password, $chuc_vu_id){
+        try {
+            $sql = 'INSERT INTO tai_khoans(ho_ten, email, mat_khau, chuc_vu_id)
+            VALUES (:ho_ten, :email, :password, :chuc_vu_id)';
+
+            $stmt = $this->conn->prepare($sql);
+            
+            $stmt->execute([
+                ':ho_ten' => $ho_ten,
+                ':email' => $email,
+                ':password' => $password,
+                ':chuc_vu_id' => $chuc_vu_id,
+            ]);
+            
+            return true;
+        } catch (Exception $e) {
+            echo "failed" . $e ->getMessage();
         }
     }
     

@@ -17,19 +17,23 @@
                                 <li class="curreny-wrap">
                                     <i class="fas fa-user"></i> Tài Khoản
                                     <i class="fa fa-angle-down"></i>
-                                    <ul class="dropdown-list curreny-list">
+                                    <ul class="dropdown-list">
+                                        <?php if (!isset($_SESSION['user_client'])) {?>
+                                        <li><a href="<?= BASE_URL . '?act=login' ?>">Hãy đăng nhập</a></li>
+                                        <?php }else{?>
+
+
                                         <li><a href="#">Hồ Sơ</a></li>
                                         <li><a href="<?= BASE_URL . '?act=logout' ?>">Đăng Xuất</a></li>
+                                        <?php  }?>
                                     </ul>
                                 </li>
-                                <li class="language">
-                                    <img src="assets/img/icon/en.png" alt="flag"> English
+                                <li class="curreny-wrap">
+                                    <i class="fa-solid fa-user-tie"></i> Admin
                                     <i class="fa fa-angle-down"></i>
-                                    <ul class="dropdown-list">
-                                        <li><a href="#"><img src="assets/img/icon/en.png" alt="flag"> english</a>
-                                        </li>
-                                        <li><a href="#"><img src="assets/img/icon/fr.png" alt="flag"> french</a>
-                                        </li>
+                                    <ul class="dropdown-list curreny-list">
+                                        <li><a href="<?= BASE_URL_ADMIN ?>">Trang Admin</a></li>
+                                        <li><a href="<?= BASE_URL . '?act=logout' ?>">Đăng Xuất</a></li>
                                     </ul>
                                 </li>
                             </ul>

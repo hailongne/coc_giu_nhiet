@@ -23,6 +23,8 @@ class HomeController {
 
     public function detailSanPham()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+
         $id = $_GET['id_san_pham'] ?? null;
         $sanPham = $this->modelSanPham->getDetailSanPham($id);
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
@@ -38,13 +40,9 @@ class HomeController {
     }
 
     public function formLogin(){
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+
         require_once './views/auth/formLogin.php';
-
-        deleteSessionError();
-    }
-
-    public function formRegister(){
-        require_once './views/auth/formRegister.php';
 
         deleteSessionError();
     }
@@ -72,48 +70,48 @@ class HomeController {
         }
     }
 
-    public function register() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $ho_ten = $_POST['ho_ten'] ?? '';
-            $email = $_POST['email'] ?? '';
-            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
-            $password = $_POST['password'] ?? '';
-    
+    public function formRegister(){
+        require_once './views/auth/formRegister.php';
+
+        deleteSessionError();
+        
+    }
+
+    public function postAddRegister(){
+        // var_dump($_POST);
+        if ($_SERVER['REQUEST_METHOD']== 'POST') {
+            $ho_ten = $_POST['ho_ten'];
+            $email = $_POST['email'];
+            $mat_khau = $_POST['mat_khau'];
+
             $errors = [];
-    
             if (empty($ho_ten)) {
                 $errors['ho_ten'] = 'Tên không được để trống';
-            }
-            if (empty($email)) {
+            }if (empty($email)) {
                 $errors['email'] = 'Email không được để trống';
+            }if (empty($email)) {
+                $errors['mat_khau'] = 'Mật Khẩu không được để trống';
             }
-            if (empty($so_dien_thoai)) {
-                $errors['so_dien_thoai'] = 'Số điện thoại không được để trống';
-            }
-            if (empty($password)) {
-                $errors['password'] = 'Mật khẩu không được để trống';
-            }
-    
-            $_SESSION['errors'] = $errors;
-    
+
+            $_SESSION['error'] = $errors;
             if (empty($errors)) {
-                $result = $this->modelTaiKhoan->checkRegister($ho_ten, $email, $so_dien_thoai, $password);
-    
-                if ($result) {
-                    header("Location: " . BASE_URL . "?act=login");
-                    exit;
-                } else {
-                    $_SESSION['errors']['email'] = 'Email đã tồn tại.';
-                    header("Location: " . BASE_URL . "?act=register");
-                    exit;
-                }
-            } else {
-                header("Location: " . BASE_URL . "?act=register");
-                exit;
+                
+                $password=password_hash('abcxyz',PASSWORD_BCRYPT);
+
+                $chuc_vu_id = 2;
+
+                $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $password, $chuc_vu_id);
+
+                header("location: " . BASE_URL . '?act=login');
+                exit();
+            }else{
+                $_SESSION['flash'] = true;
+
+                header("location: " . BASE_URL . '?act=add-register');
+                exit();
             }
         }
-    
-        require './views/auth/formRegister.php';
+        
     }
 
     public function logout(){

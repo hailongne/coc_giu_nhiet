@@ -32,32 +32,26 @@
                     <div class="col-lg-12">
                         <div class="login-reg-form-wrap">
                             <h5 class="text-center">Đăng Ký</h5>
-                            <form action="<?= BASE_URL . '?act=register' ?>" method="post">
+                            <form action="<?= BASE_URL . '?act=add-register' ?>" method="POST">
                                 <div class="single-input-item">
-                                    <input type="text" placeholder="Nhập tên" name="ho_ten" />
-                                    <?php if (isset($_SESSION['errors']['ho_ten'])) {?>
-                                    <p class="text-danger"><?= $_SESSION['errors']['ho_ten'] ?></p>
+                                    <input type="text" class="form-control" name="ho_ten" placeholder="Nhập Họ Tên" />
+                                    <?php if (isset($_SESSION['error']['ho_ten'])) {?>
+                                    <p class="text-danger"><?= $_SESSION['error']['ho_ten'] ?></p>
                                     <?php } ?>
                                 </div>
 
                                 <div class="single-input-item">
-                                    <input type="email" placeholder="Nhập Email" name="email" />
-                                    <?php if (isset($_SESSION['errors']['email'])) {?>
-                                    <p class="text-danger"><?= $_SESSION['errors']['email'] ?></p>
+                                    <input type="email" class="form-control" name="email" placeholder="Nhập Email" />
+                                    <?php if (isset($_SESSION['error']['email'])) {?>
+                                    <p class="text-danger"><?= $_SESSION['error']['email'] ?></p>
                                     <?php } ?>
                                 </div>
 
                                 <div class="single-input-item">
-                                    <input type="text" placeholder="Nhập Số Điện Thoại" name="so_dien_thoai" />
-                                    <?php if (isset($_SESSION['errors']['so_dien_thoai'])) {?>
-                                    <p class="text-danger"><?= $_SESSION['errors']['so_dien_thoai'] ?></p>
-                                    <?php } ?>
-                                </div>
-
-                                <div class="single-input-item">
-                                    <input type="password" placeholder="Nhập Password" name="password" />
-                                    <?php if (isset($_SESSION['errors']['password'])) {?>
-                                    <p class="text-danger"><?= $_SESSION['errors']['password'] ?></p>
+                                    <input type="password" class="form-control" name="password"
+                                        placeholder="Nhập Mật Khẩu" />
+                                    <?php if (isset($_SESSION['error']['password'])) {?>
+                                    <p class="text-danger"><?= $_SESSION['error']['password'] ?></p>
                                     <?php } ?>
                                 </div>
                                 <div class="single-input-item">
