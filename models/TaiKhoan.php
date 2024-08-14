@@ -7,6 +7,38 @@ class TaiKhoan {
         $this->conn = connectDB();
     }
 
+    public function checkLogin($email, $mat_khau){
+        try {
+            $sql = "SELECT * FROM tai_khoans WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute (['email'=>$email]);
+
+            $user = $stmt->fetch();
+
+            if ($user && password_verify($mat_khau,$user['mat_khau'])) {
+                
+                if ($user['chuc_vu_id'] == 2 ) {
+                    
+                    if ($user['trang_thai'] == 1) {
+                        return $user['email'];
+                    }else{
+                        
+                    return 'Tài Khoản Bị Cấm!!!!!';
+                    }
+                    
+                } else {
+                    return 'Tài Khoản không có quyền đăng nhập !!!!!';
+                }
+                
+            }else{
+                return 'Bạn nhập sai tài khoản hoặc mật khẩu !!!!!';
+            }
+        }catch(\Exception $e){
+            echo 'failed' . $e->getMessage();
+            return false;
+        }
+    }
+
     public function checkRegister($ho_ten, $email, $so_dien_thoai, $password) {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -27,16 +59,18 @@ class TaiKhoan {
         return true;
     }
 
-    public function checkLogin($email, $mat_khau) {
-        $sql = "SELECT * FROM tai_khoans WHERE email = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function getTaiKhoanFromEmail($email){
+        try {
+            $sql = "SELECT * FROM tai_khoans WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':email' => $email
+            ]);
 
-        if ($user && password_verify($mat_khau, $user['mat_khau'])) {
-            return $user;
+            return $stmt ->fetch();
+        } catch (Exception $e)   {
+            echo 'failed' . $e->getMessage();
         }
-
-        return false; // Đăng nhập thất bại
     }
+    
 }

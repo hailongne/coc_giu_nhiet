@@ -21,7 +21,7 @@ class SanPham{
             echo "lỗi" . $e->getMessage();
         }
     }
-
+    
     public function insertSanPham($ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
     {
         try {
@@ -96,26 +96,55 @@ class SanPham{
             echo "loi" . $e->getMessage();
         }
     }
-    public function search() {
-        // Lấy giá trị tìm kiếm từ biến GET, nếu không có giá trị thì đặt thành chuỗi rỗng
-        $search = isset($_GET['search']) ? $_GET['search'] : '';
-    
-        // Kiểm tra nếu có từ khóa tìm kiếm
-        if ($search) {
-            // Chuẩn bị câu truy vấn SQL với điều kiện tìm kiếm
-            $sql = "SELECT * FROM san_phams WHERE ten_san_pham LIKE :search";
+
+    public function getBinhLuanFromSanPham($id)
+    {
+        try {
+            $sql = "SELECT binh_luans.*, tai_khoans.ho_ten, tai_khoans.anh_dai_dien
+            FROM binh_luans 
+            INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
+            WHERE binh_luans.san_pham_id = :id";
+
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute(['search' => '%' . $search . '%']);
+
+            $stmt->execute([':id' => $id]);
             
-            // Lấy tất cả các kết quả tìm kiếm
-            $listSanPham = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            // Trả về danh sách sản phẩm tìm được
-            return $listSanPham;
-        } else {
-            // Nếu không có từ khóa tìm kiếm, trả về thông báo không có sản phẩm
-            return 'không tồn tại sản phẩm nào';
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
         }
     }
-    
+
+    public function getListSanPhamDanhMuc($danh_muc_id)
+    {
+        try {
+            $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc 
+            FROM san_phams 
+            INNER JOIN danh_mucs 
+            ON san_phams.danh_muc_id = danh_mucs.id
+            WHERE san_phams.danh_muc_id = " . $danh_muc_id;
+            
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "lỗi" . $e->getMessage();
+        }
+    }
+
+    public function getAllDanhMuc(){
+        try {
+            $sql = 'SELECT * FROM danh_mucs';
+
+            $stmt = $this->conn->prepare($sql);
+            
+            $stmt->execute();
+            
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "failed" . $e ->getMessage();
+        }
+    }
 }
