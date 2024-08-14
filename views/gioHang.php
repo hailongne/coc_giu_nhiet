@@ -11,8 +11,8 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
+                                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a>
+                                </li>
                                 <li class="breadcrumb-item active" aria-current="page">Giỏ Hàng</li>
                             </ul>
                         </nav>
@@ -26,7 +26,17 @@
     <!-- cart main wrapper start -->
     <div class="cart-main-wrapper section-padding">
         <div class="container">
+
+            <?php if (isset($_SESSION['user_client'] )) {?>
+            <?php if (empty($_SESSION['gio_hangs'] )) {?>
             <div class="section-bg-color">
+                Giỏ Hàng của bạn chưa có sản phẩm nào. <a href="<?= BASE_URL . '?act=all-san-pham'?>">Hãy mua sẵm ngay
+                    nào</a>
+            </div>
+            <?php } else {?>
+
+            <div class="section-bg-color">
+
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- Cart Table Area -->
@@ -39,15 +49,12 @@
                                         <th class="pro-price">Giá tiền</th>
                                         <th class="pro-quantity">Số lượng</th>
                                         <th class="pro-subtotal">Tổng tiền</th>
-                                        <th class="pro-remove">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $tongHang = 0;
-                                    foreach ($chiTietGioHang as $key => $sanPham):
-
-                                    ?>
+                                    <?php $tongHang = 0;
+                                        foreach ($chiTietGioHang as $key => $sanPham):
+                                        ?>
                                     <tr>
                                         <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
                                                     src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="Product" /></a>
@@ -63,32 +70,29 @@
                                                 <?php } ?>
 
                                             </span></td>
-                                        <td class="pro-quantity">
-                                            <div class="pro-qty"><input type="text" value="<?= $sanPham['so_luong'] ?>">
-                                            </div>
+                                        <td class="pro-quantity"><?= $sanPham['so_luong'] ?> Sản Phẩm
                                         </td>
                                         <td class="pro-subtotal">
                                             <span>
                                                 <?php
-                                                    $tongTien = 0;
+                                    $tongTien = 0;
 
-                                                    if ($sanPham['gia_khuyen_mai']) {
-                                                        $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
-                                                    } else {
-                                                        $tongTien = $sanPham['gia_san_pham'] * $sanPham['so_luong'];
-                                                    }
+                                    if ($sanPham['gia_khuyen_mai']) {
+                                        $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
+                                    } else {
+                                        $tongTien = $sanPham['gia_san_pham'] * $sanPham['so_luong'];
+                                    }
 
-                                                    if (!isset($tongGioHang)) {
-                                                        $tongGioHang = 0; 
-                                                    }
+                                    if (!isset($tongGioHang)) {
+                                        $tongGioHang = 0; 
+                                    }
 
-                                                    $tongGioHang += $tongTien; 
-                                                    echo formatPrice($tongTien) . 'đ';
-                                                    ?>
+                                    $tongGioHang += $tongTien; 
+                                    echo formatPrice($tongTien) . 'đ';
+                                    ?>
                                             </span>
                                         </td>
 
-                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                     </tr>
                                     <?php endforeach ?>
                                 </tbody>
@@ -136,19 +140,45 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
+            <?php }
+            else{?>
+            <div class="section-bg-color">
+                Bạn cần đăng nhập để thực hiện chức năng này. <a class="text-warning"
+                    href="<?= BASE_URL . '?act=login'?>">Đăng
+                    Nhập Ngay</a>
+            </div>
+            <?php  }?>
+
+
         </div>
     </div>
     <!-- cart main wrapper end -->
 </main>
 
+<!-- Giỏ Hàng -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function confirmDeleteProduct(id) {
+    Swal.fire({
+        title: 'Bạn có muốn xóa sản phẩm không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Có, xóa nó!',
+        cancelButtonText: 'Không, hủy!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '<?= BASE_URL ?>?act=xoa-san-pham&id_san_pham=' + id;
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+                'Hủy',
+                'Sản phẩm vẫn an toàn :)',
+                'error'
+            )
+        }
+    })
+}
+</script>
 
-
-
-
-
-
-
-
-
-<?php require_once 'layout/miniCart.php'; ?>
 <?php require_once 'layout/footer.php'; ?>

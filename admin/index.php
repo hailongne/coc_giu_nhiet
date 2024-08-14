@@ -63,6 +63,11 @@ match ($act) {
     'sua-khach-hang' => (new AdminTaiKhoanController())->postEditKhachHang(),
     'chi-tiet-khach-hang' => (new AdminTaiKhoanController())->detailKhachHang(),
 
+    
+    'form-sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
+    // 'sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
+    'sua-mat-khau-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
+
     'login-admin'=> (new AdminTaiKhoanController())->formLogin(),
     'check-login-admin'=> (new AdminTaiKhoanController())->login(),
     'logout-admin'=> (new AdminTaiKhoanController())->logout(),

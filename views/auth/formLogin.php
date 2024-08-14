@@ -41,11 +41,13 @@
                                 </div>
                                 <div class="single-input-item">
                                     <div class=" d-flex align-items-center justify-content-between">
-                                        <?php if (isset($_SESSION['error'])) {?>
-                                        <p class="text-danger login-box-msg"><?= $_SESSION['error'] ?></p>
-                                        <?php } else {?>
+                                        <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
+                                        <p class="text-danger login-box-msg">
+                                            <?= htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8') ?></p>
+                                        <?php else: ?>
                                         <p class="text-danger login-box-msg">Vui lòng đăng nhập!</p>
-                                        <?php } ?>
+                                        <?php endif; ?>
+
                                         <a href="#" class="forget-pwd">Quên Mật Khẩu?</a>
                                     </div>
                                 </div>

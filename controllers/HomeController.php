@@ -21,6 +21,11 @@ class HomeController {
         require './views/home.php';
     }
 
+    public function gioiThieu() {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+        require './views/gioiThieu.php';
+    }
+
     public function detailSanPham()
     {
         $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
@@ -28,13 +33,13 @@ class HomeController {
         $id = $_GET['id_san_pham'] ?? null;
         $sanPham = $this->modelSanPham->getDetailSanPham($id);
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
-        $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
+        $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id); 
         $listSanPhamFromDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
         if ($sanPham) {
             require_once './views/detailSanPham.php';
         } else {
             // Nếu không tìm thấy sản phẩm hoặc không có ID, chuyển hướng về danh sách sản phẩm
-            header('Location: ' . BASE_URL . '?act=san-pham');
+            header('Location: ' . BASE_URL );
             exit();
         }
     }
@@ -53,16 +58,13 @@ class HomeController {
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $user = $this->modelTaiKhoan->checklogin($email, $password);
-            // var_dump($email);die;
-
+            $user = $this->modelTaiKhoan->checklogin($email, $password); 
             if($user == $email) {
                 $_SESSION['user_client'] = $user;
                 header ("Location: " . BASE_URL);
                 exit();
             }else{
                 $_SESSION['error'] = $user;
-                // var_dump($_SESSION['error']);die;
                 $_SESSION['flash'] = true;
                 header ("Location:" . BASE_URL . '?act=login');
                 exit();
@@ -71,46 +73,62 @@ class HomeController {
     }
 
     public function formRegister(){
+        
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+
         require_once './views/auth/formRegister.php';
 
         deleteSessionError();
         
     }
 
-    public function postAddRegister(){
-        // var_dump($_POST);
-        if ($_SERVER['REQUEST_METHOD']== 'POST') {
-            $ho_ten = $_POST['ho_ten'];
-            $email = $_POST['email'];
-            $mat_khau = $_POST['mat_khau'];
-
+    public function checkRegister(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Lấy dữ liệu từ form
+            $ho_ten = $_POST['ho_ten'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $password = $_POST['password'] ?? '';
+    
             $errors = [];
+    
+            // Kiểm tra dữ liệu đầu vào
             if (empty($ho_ten)) {
                 $errors['ho_ten'] = 'Tên không được để trống';
-            }if (empty($email)) {
-                $errors['email'] = 'Email không được để trống';
-            }if (empty($email)) {
-                $errors['mat_khau'] = 'Mật Khẩu không được để trống';
             }
-
+            if (empty($email)) {
+                $errors['email'] = 'Email không được để trống';
+            } 
+            if (empty($password)) {
+                $errors['password'] = 'Mật khẩu không được để trống';
+            }
+    
+            // Lưu lỗi vào session nếu có
             $_SESSION['error'] = $errors;
+    
             if (empty($errors)) {
-                
-                $password=password_hash('abcxyz',PASSWORD_BCRYPT);
-
-                $chuc_vu_id = 2;
-
-                $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $password, $chuc_vu_id);
-
-                header("location: " . BASE_URL . '?act=login');
-                exit();
-            }else{
-                $_SESSION['flash'] = true;
-
-                header("location: " . BASE_URL . '?act=add-register');
-                exit();
+                // Gọi phương thức đăng ký từ model
+                $result = $this->modelTaiKhoan->checkRegister($ho_ten, $email, $password);
+    
+                if ($result) {
+                    // Đăng ký thành công, chuyển hướng đến trang đăng nhập
+                    header("Location: " . BASE_URL . "?act=login");
+                    exit;
+                } else {
+                    // Nếu email đã tồn tại
+                    $_SESSION['errors']['email'] = 'Email đã tồn tại.';
+                    header("Location: " . BASE_URL . "?act=register");
+                    exit;
+                }
+            } else {
+                // Nếu có lỗi, chuyển hướng về trang đăng ký
+                header("Location: " . BASE_URL . "?act=register");
+                exit;
             }
         }
+    
+        // Hiển thị form đăng ký nếu không phải là POST
+        require './views/auth/formRegister.php';
         
     }
 
@@ -121,16 +139,9 @@ class HomeController {
         }
     }
 
-    public function chinhSachBaoMat(){
-        require_once './views/pages/chinhsach/chinhsachbaomat.php';
-    }
-    
-    public function chinhSachThongBao(){
-        require_once './views/pages/chinhsach/chinhsachthongbao.php';
-    }
-
     public function addGioHang()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_SESSION['user_client'])) {
                 $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
@@ -143,7 +154,7 @@ class HomeController {
                     $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
                 }
 
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']); 
                 $san_pham_id = $_POST['san_pham_id'];
                 $so_luong = $_POST['so_luong'];
 
@@ -169,14 +180,18 @@ class HomeController {
     }
 
     public function gioHang() {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+
         if (isset($_SESSION['user_client'])) {
             $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             // lấy dữ liệu giỏ hàng của người dùng
-            $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+            $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']); 
+            $_SESSION['gio_hangs'] = $gioHang;
             if (!$gioHang) {
                 $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
                 $gioHang = ['id' => $gioHangId];
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']); 
+                
             } else {
                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
             }
@@ -184,12 +199,12 @@ class HomeController {
             require_once './views/gioHang.php';
 
         } else {
-            var_dump('Chưa đăng nhập');
-            die;
+            require_once './views/gioHang.php';
         }
     }
 
     public function thanhToan() {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
         if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
@@ -200,7 +215,7 @@ class HomeController {
                 $gioHang = ['id' => $gioHangId];
                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
             } else {
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']); 
             }
 
             require_once './views/thanhToan.php';
@@ -244,5 +259,24 @@ class HomeController {
 
             var_dump('them thanh cong');die;
         }
+    }
+
+    public function getAllSanPham() {
+        
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+        $listSanPham = $this->modelSanPham->getAllSanPham();
+        
+        require_once './views/danhSachSanPham.php';
+    }
+
+    public function getSanPhamfromDanhMuc()
+    {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+
+        $id = $_GET['id_san_pham'] ?? null;
+        $sanPham = $this->modelSanPham->getDetailSanPham($id);
+        $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+        $listSanPhamFromDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
+        require_once './views/SanPhamFromDanhMuc.php';
     }
 }

@@ -147,4 +147,6 @@ class SanPham{
             echo "failed" . $e ->getMessage();
         }
     }
+
+    
 }

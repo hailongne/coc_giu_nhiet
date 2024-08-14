@@ -32,7 +32,7 @@
                     <div class="col-lg-12">
                         <div class="login-reg-form-wrap">
                             <h5 class="text-center">Đăng Ký</h5>
-                            <form action="<?= BASE_URL . '?act=add-register' ?>" method="POST">
+                            <form action="<?= BASE_URL . '?act=check-register' ?>" method="POST">
                                 <div class="single-input-item">
                                     <input type="text" class="form-control" name="ho_ten" placeholder="Nhập Họ Tên" />
                                     <?php if (isset($_SESSION['error']['ho_ten'])) {?>

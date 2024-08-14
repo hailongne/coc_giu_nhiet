@@ -18,7 +18,7 @@
                                     <i class="fas fa-user"></i> Tài Khoản
                                     <i class="fa fa-angle-down"></i>
                                     <ul class="dropdown-list">
-                                        <?php if (!isset($_SESSION['user_client'])) {?>
+                                        <?php if (!isset($_SESSION['user_client'] )) {?>
                                         <li><a href="<?= BASE_URL . '?act=login' ?>">Hãy đăng nhập</a></li>
                                         <?php }else{?>
 
@@ -33,7 +33,6 @@
                                     <i class="fa fa-angle-down"></i>
                                     <ul class="dropdown-list curreny-list">
                                         <li><a href="<?= BASE_URL_ADMIN ?>">Trang Admin</a></li>
-                                        <li><a href="<?= BASE_URL . '?act=logout' ?>">Đăng Xuất</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -50,7 +49,7 @@
                 <div class="row align-items-center position-relative">
 
                     <!-- start logo area -->
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 ">
                         <div class="logo">
                             <a href="<?= BASE_URL ?>">
                                 <img src="assets/img/logoBrand/logo.png" width="60px" alt="Logo">
@@ -72,19 +71,20 @@
                                             </a>
 
                                         </li>
-                                        <li><a href=""><i class="fa-solid fa-blender"></i> Sản
+                                        <li><a href="<?= BASE_URL . '?act=all-san-pham'?>"><i
+                                                    class="fa-solid fa-blender"></i> Sản
                                                 Phẩm <i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
                                                 <?php foreach ($listDanhMuc as $danhMuc):?>
-                                                <li><a href="#"><?= $danhMuc['ten_danh_muc']?></a>
+                                                <li><a
+                                                        href="<?= BASE_URL . '?act=all-san-pham&'?>"><?= $danhMuc['ten_danh_muc']?></a>
                                                 </li>
                                                 <?php endforeach ?>
                                             </ul>
                                         </li>
-                                        <li><a href="contact-us.html"><i class="fa-solid fa-credit-card"></i> Giới
+                                        <li><a href="<?= BASE_URL . '?act=gioi-thieu' ?>"><i
+                                                    class="fa-solid fa-credit-card"></i> Giới
                                                 Thiệu</a></li>
-                                        <li><a href="contact-us.html"><i class="fa-solid fa-headset"></i> Liên
-                                                Hệ</a></li>
                                     </ul>
                                 </nav>
                                 <!-- main menu navbar end -->
@@ -95,23 +95,18 @@
 
                     <!-- mini cart area start -->
                     <div class="col-lg-4">
-                        <div
-                            class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
-                            <div class="header-search-container">
-                                <button class="search-trigger d-xl-none d-lg-block"><i
-                                        class="pe-7s-search"></i></button>
-                                <form class="header-search-box d-lg-none d-xl-block">
-                                    <input type="text" placeholder="Nhập tên sản phẩm" class="header-search-field">
-                                    <button class="header-search-btn"><i class="pe-7s-search"></i></button>
-                                </form>
-                            </div>
+                        <div class="d-flex align-items-center justify-content-end">
                             <div class="header-configure-area ">
+
+
                                 <ul class="nav justify-content-end">
                                     <label for="">
-                                        <?php if (isset($_SESSION['user_client'])) {
-                                            echo $_SESSION['user_client'];
-                                        } ?></label>
+                                        <?php if (isset($_SESSION['user_client'])) {?>
+                                        Xin Chào <?php echo $_SESSION['user_client'] ?>
+                                        <?php } ?>
+                                    </label>
                                     <li class="user-hover">
+
                                         <a href="#">
                                             <i class="pe-7s-user"></i>
                                         </a>
@@ -128,9 +123,8 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#" class="minicart-btn">
+                                        <a href="<?= BASE_URL. '?act=gio-hang' ?>" class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
-                                            <div class="notification">2</div>
                                         </a>
                                     </li>
                                 </ul>
