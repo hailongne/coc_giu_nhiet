@@ -77,7 +77,7 @@
                                             <ul class="dropdown">
                                                 <?php foreach ($listDanhMuc as $danhMuc):?>
                                                 <li><a
-                                                        href="<?= BASE_URL . '?act=all-san-pham&'?>"><?= $danhMuc['ten_danh_muc']?></a>
+                                                        href="<?= BASE_URL . '?act=all-san-pham'?>"><?= $danhMuc['ten_danh_muc']?></a>
                                                 </li>
                                                 <?php endforeach ?>
                                             </ul>

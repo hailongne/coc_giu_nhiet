@@ -236,14 +236,13 @@ class HomeController {
             $tong_tien = $_POST['tong_tien'];
             $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
 
-            $ngay_dat = date('d-m-Y');
+            $ngay_dat = date('Y-m-d');
             $trang_thai_id = 1;
 
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
 
             $ma_don_hang= 'PL-' . rand(100,999);
-
             $this->modelDonHang->addDonHang($tai_khoan_id,
                                             $ten_nguoi_nhan, 
                                             $email_nguoi_nhan, 
@@ -256,8 +255,8 @@ class HomeController {
                                             $ma_don_hang,
                                             $trang_thai_id
             );
-
-            var_dump('them thanh cong');die;
+            header('Location:' . BASE_URL . '?act=thanh-cong');
+            exit();
         }
     }
 
@@ -278,5 +277,10 @@ class HomeController {
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
         $listSanPhamFromDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']);
         require_once './views/SanPhamFromDanhMuc.php';
+    }
+    public function formThanhCong() {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+
+        require_once './views/thanhCong.php';
     }
 }

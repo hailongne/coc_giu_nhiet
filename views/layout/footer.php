@@ -9,7 +9,7 @@
     <div class="footer-top section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="widget-item">
                         <div class="widget-title">
                             <div class="widget-logo">
@@ -25,13 +25,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-5 ms-5">
+                <div class="col-lg-4 col-md-5 ms-5">
                     <div class="widget-item">
                         <h6 class="widget-title">Liên Hệ</h6>
                         <div class="widget-body">
                             <address class="contact-block">
                                 <ul>
-                                    <li><i class="pe-7s-home"></i> 13 Trịnh Văn bô - Nam Từ Liêm <br> Hà
+                                    <li><i class="pe-7s-home"></i> 13 Trịnh Văn bô - Nam Từ Liêm - Hà
                                         Nội</li>
                                     <li><i class="pe-7s-mail"></i> <a
                                             href="mailto:nongthanthien2004@gmail.com">nongthanthien2004@gmail.com </a>
