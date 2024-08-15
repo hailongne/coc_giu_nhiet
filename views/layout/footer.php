@@ -1,111 +1,111 @@
-<style>
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-}
+<!-- Scroll to top start -->
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+<!-- Scroll to Top End -->
 
-.footer-logo {
-    display: flex;
-    text-decoration: none;
-    margin-bottom: 20px;
-}
-
-.footer-logo img {
-    margin: 0 10px;
-}
-
-.footer-logo img:first-child {
-    width: 50px;
-}
-
-.footer-logo img:last-child {
-    width: 150px;
-}
-
-.footer p {
-    margin-bottom: 30px;
-}
-
-.footer h5 {
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-.footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer ul li {
-    color: #ddd;
-    margin-bottom: 10px;
-}
-
-.footer ul li i {
-    margin-right: 10px;
-}
-
-.footer a {
-    color: #fff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.footer a:hover {
-    color: #ccc;
-}
-
-.footer-bottom {
-    background-color: #222;
-    padding: 10px 0;
-    text-align: center;
-}
-
-.footer-bottom p {
-    margin: 0;
-    color: #ddd;
-}
-
-.col-md-5.mt-5 {
-    display: flex;
-    flex-direction: column;
-}
-</style>
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="<?= BASE_URL?>" class="footer-logo">
-                    <img src="views/assets/logo/logo.png" width="50" alt="Logo">
-                    <img src="views/assets/logo/logotext.png" width="150" alt="Logo">
-                </a>
-                <p>Công ty TNHH Cốc Giữ Nhiệt Phúc Long chuyên cung cấp các sản phẩm giữ nhiệt chất lượng cao.</p>
-            </div>
-            <div class="col-md-4 mt-5">
-                <h5>Liên Hệ</h5>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> 13 Trịnh Văn bô - Xuân Phương <br> Nam Từ Liêm - Hà Nội
-                    </li>
-                    <li><i class="fas fa-phone"></i> 0369312858</li>
-                    <li><i class="fas fa-envelope"></i> phuclong@gmail.com</li>
-                </ul>
-            </div>
-            <div class="col-md-3 mt-5">
-                <h5>Chính Sách</h5>
-                <a href="<?= BASE_URL . '?act=chinh-sach-bao-mat' ?>">Chính Sách Bảo Mật</a>
-                <a href="<?= BASE_URL . '?act=chinh-sach-thong-bao' ?>"> Chính Sách Thông Báo</a>
-            </div>
-            <div id="thankYouPopup" class=" col-md-5 mt-5">
-                <h5>Cảm ơn bạn đã ghé thăm!</h5>
-                <p>Chúng tôi rất vui khi bạn đã xem qua website của chúng tôi. Hy vọng bạn đã tìm thấy những thông
-                    tin hữu ích.</p>
+<!-- footer area start -->
+<footer class="footer-widget-area">
+    <div class="footer-top section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="widget-item">
+                        <div class="widget-title">
+                            <div class="widget-logo">
+                                <a href="<?= BASE_URL ?>">
+                                    <img src="assets/img/logobrand/logo.png" alt="brand logo" width="60px">
+                                    <img src="assets/img/logobrand/logo2.png" alt="brand logo" width="150px">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="widget-body">
+                            <p>Chúng tôi rất vui khi bạn đã xem qua website của chúng tôi. Hy vọng bạn đã tìm thấy những
+                                thông tin hữu ích. <br> <strong> Chân Thành Cảm Ơn </strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5 ms-5">
+                    <div class="widget-item">
+                        <h6 class="widget-title">Liên Hệ</h6>
+                        <div class="widget-body">
+                            <address class="contact-block">
+                                <ul>
+                                    <li><i class="pe-7s-home"></i> 13 Trịnh Văn bô - Nam Từ Liêm - Hà
+                                        Nội</li>
+                                    <li><i class="pe-7s-mail"></i> <a
+                                            href="mailto:nongthanthien2004@gmail.com">nongthanthien2004@gmail.com </a>
+                                    </li>
+                                    <li><i class="pe-7s-call"></i> <a href="tel:0369 312 858">hotline: 0369 312
+                                            858</a></li>
+                                </ul>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 ms-5">
+                    <div class="widget-item">
+                        <h6 class="widget-title">Follow Us</h6>
+                        <div class="widget-body social-link">
+                            <a href="https://www.facebook.com/hailong.07.01.2004"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/daghailong/"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2024 Cốc Giữ Nhiệt Phúc Long. All rights reserved.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright-text text-center">
+                        <p>&copy; 2022 <b>Cốc Giữ Nhiệt Phúc Long</b> Made with <i class="fa fa-heart text-danger"></i>
+                            by <a href="https://hasthemes.com/"><b>HasThemes</b></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
+<!-- footer area end -->
+
+
+
+<!-- JS
+============================================ -->
+
+<!-- Modernizer JS -->
+<script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- jQuery JS -->
+<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<!-- slick Slider JS -->
+<script src="assets/js/plugins/slick.min.js"></script>
+<!-- Countdown JS -->
+<script src="assets/js/plugins/countdown.min.js"></script>
+<!-- Nice Select JS -->
+<script src="assets/js/plugins/nice-select.min.js"></script>
+<!-- jquery UI JS -->
+<script src="assets/js/plugins/jqueryui.min.js"></script>
+<!-- Image zoom JS -->
+<script src="assets/js/plugins/image-zoom.min.js"></script>
+<!-- Images loaded JS -->
+<script src="assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+<!-- mail-chimp active js -->
+<script src="assets/js/plugins/ajaxchimp.js"></script>
+<!-- contact form dynamic js -->
+<script src="assets/js/plugins/ajax-mail.js"></script>
+<!-- google map api -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
+<!-- google map active js -->
+<script src="assets/js/plugins/google-map.js"></script>
+<!-- Main JS -->
+<script src="assets/js/main.js"></script>
+</body>
+
+
+<!-- Mirrored from htmldemo.net/corano/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:53:43 GMT -->
+
+</html>

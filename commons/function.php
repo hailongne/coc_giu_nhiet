@@ -89,3 +89,8 @@ function checkLoginUser(){
         exit();
     }
 }
+
+function formatPrice($price)
+{
+    return number_format($price, 0, ',', '.');
+}

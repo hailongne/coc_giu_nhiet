@@ -33,14 +33,11 @@
                 <a href="<?= BASE_URL ?>" class="h1">Cốc Giữ Nhiệt <br> Phúc Long</a>
             </div>
             <div class="card-body">
-                <?php if (isset($_SESSION['error'])) {?>
-                <p class="text-danger login-box-msg"><?= $_SESSION['error'] ?></p>
-                <?php } else {?>
-                <p class="login-box-msg">Vui lòng đăng nhập tài khoản admin</p>
-                <?php } ?>
-
-
-
+                <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])): ?>
+                <p class="text-danger login-box-msg"><?= htmlspecialchars($_SESSION['error']) ?></p>
+                <?php else: ?>
+                <p class="text-danger login-box-msg">Vui lòng đăng nhập tài khoản admin</p>
+                <?php endif; ?>
                 <form action="<?= BASE_URL_ADMIN . '?act=check-login-admin' ?>" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" name="email">
